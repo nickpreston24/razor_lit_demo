@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - razor_lit_demo</title>
+    <script type="importmap"></script>
+    @* <link href="/lib/lit/index.min.js"/> *@
+    <script type="module" src="js/math.js"></script>
+    <script type="module" src="~/lit/components/my-timer.js"></script>
+    <script type="module" src="~/lit/components/greeting.js"></script>
+</head>
+<body>
+<header>
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+        </li>
+    </ul>
+</header>
+<div class="">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="">
+        &copy; 2025 - razor_lit_demo - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    </div>
+</footer>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
