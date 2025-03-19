@@ -4,18 +4,68 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
 
-    <p>Here's a Lit example</p>
+<div x-data="setup()" class="text-center flex flex-col items-center">
+    <h1 class="display-4">
+        Welcome to Lit x HTMX x Razor!
+    </h1>
 
-    <my-timer duration="7"></my-timer>
-    <my-timer duration="60"></my-timer>
-    <my-timer duration="300"></my-timer>
 
-    <simple-greeting name="World"></simple-greeting>
+    <section class="grid grid-cols-2 gap-2">
 
+        <div class="card dog-body">
+
+            <div class="card w-96 bg-base-100 card-xl shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        Xlarge Card
+                    </h2>
+
+                    <div class="flex flex-col items-center justify-center gap-2">
+
+                        <p class="text-slate-500">
+                            The following is a Hello World in Lit, using custom styles defined inside the
+                            component itself
+                        </p>
+
+                        <simple-greeting name="my baby"></simple-greeting>
+                        <simple-greeting name="my honey"></simple-greeting>
+                    </div>
+
+                    <div class="justify-end card-actions">
+                        @* <button class="btn btn-primary">Buy Now</button> *@
+                        <down-circle-button></down-circle-button>
+                        <span x-text="foo"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+
+            <div hx-sse="connect:/rn-updates">
+                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Featured Random Number</div>
+                    <div class="card-body">
+                        <h5 class="card-title">The Random Number is..</h5>
+                        <p class="card-text"
+                           hx-trigger="sse:number"
+                           hx-get="/random">
+                            <span>@Number.Value</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
-@* <script type="module" src="lit/components/greeting.js"></script> *@
-@* <script type="module" src="lit/components/my-timer.js"></script> *@
+<script>
+
+    function setup() {
+        return {
+            foo: "Download"
+        }
+    }
+</script>
+

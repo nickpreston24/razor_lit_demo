@@ -28,25 +28,37 @@
 
     <ItemGroup>
 
-        <Watch Include="**/*.sql"/>
-        <Watch Include="lit/**/*.js"/>
-        <Watch Include=".env"/>
+        <Watch Include="**\*.cshtml*" />
+        <Watch Include="/js/*.js" />
+        <Watch Include="/lit/*.js" />
+        <Watch Include=".env" />
+        <Watch Include="**/*.sql" />
+        <Watch Include="**/*.cypher" />
+
+        <!--        <Watch Include="**/*.sql"/>-->
+        <!--        <Watch Include="lit/**/*.js"/>-->
+        <!--        <Watch Include=".env"/>-->
 
     </ItemGroup>
     <!--    packages necessary-->
 
     <ItemGroup>
-        <PackageReference Include="CodeMechanic.Shargs" Version="1.0.4"/>
-        <PackageReference Include="Hydro" Version="1.1.0"/>
-        <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175"/>
-        <PackageReference Include="Serilog" Version="4.2.0"/>
-        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0"/>
-        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0"/>
-        <PackageReference Include="Sharpify.Core" Version="1.0.3"/>
+        <PackageReference Include="Alpine.TagHelpers" Version="0.2.0" />
+        <PackageReference Include="CodeMechanic.Shargs" Version="1.0.4" />
+        <PackageReference Include="CodeMechanic.Types" Version="1.0.12" />
+        <PackageReference Include="Htmx" Version="1.8.1" />
+        <PackageReference Include="Htmx.TagHelpers" Version="1.8.1" />
+        <PackageReference Include="Hydro" Version="1.1.0" />
+        <PackageReference Include="Lib.AspNetCore.ServerSentEvents" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
+        <PackageReference Include="Serilog" Version="4.2.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+        <PackageReference Include="Sharpify.Core" Version="1.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="wwwroot\lit\**"/>
+        <None Include="wwwroot\lit\**" />
     </ItemGroup>
 
 </Project>

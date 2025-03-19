@@ -53,6 +53,8 @@ internal class Program
         builder.Services.AddRazorPages();
         builder.Services.AddHydro();
 
+        builder.Services.AddSingleton<LatLongService>();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
