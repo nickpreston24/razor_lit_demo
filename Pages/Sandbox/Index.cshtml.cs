@@ -1,4 +1,5 @@
-﻿using CodeMechanic.Types;
+﻿using CodeMechanic.Diagnostics;
+using CodeMechanic.Types;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,24 +7,25 @@ namespace razor_lit_demo.Pages.Sandbox;
 
 public class Index : PageModel
 {
-    private static List<Todo> todo_list = new List<Todo>()
+    private static List<Resource> items = new List<Resource>()
     {
-        new Todo("buy milk"),
-        new Todo("eat dinner"),
-        new Todo("make bed"),
+        new Resource("buy milk", state: "Running"),
+        new Resource("eat dinner", ""),
+        new Resource("make bed", ""),
     };
 
     public void OnGet()
     {
     }
 
-    public IActionResult OnGetTodos(string viewname = "")
+    public IActionResult OnGetContainers(string viewname = "")
     {
         Console.WriteLine(viewname);
-        Console.WriteLine(nameof(OnGetTodos));
+        Console.WriteLine(nameof(OnGetContainers));
         if (viewname.IsEmpty())
             return Content($"<p>Hello, World!</p>");
 
-        return Partial(viewname, todo_list);
+        items.Dump("resources   ");
+        return Partial(viewname, items);
     }
 }

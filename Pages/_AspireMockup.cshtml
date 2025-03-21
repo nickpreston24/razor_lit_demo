@@ -1,8 +1,11 @@
-﻿@using CodeMechanic.Diagnostics
-@using CodeMechanic.Types
-@model List<Todo>
+﻿@using CodeMechanic.Types
+@model List<Resource>
 
 @{
+    var prop_names = typeof(Resource)
+        .GetProperties()
+        .Select(x => x.Name)
+        .ToArray();
 }
 
 <div class="overflow-x-auto">
@@ -10,15 +13,25 @@
         <thead>
         <tr>
             <th></th>
-            <th>Description</th>
+            @foreach (var property_name in prop_names)
+            {
+                <th>@property_name</th>
+            }
         </tr>
         </thead>
         <tbody>
-        @foreach ((Todo todo, int index) in @Model.WithIndex().Dump("with index"))
+        @foreach ((Resource item, int index) in @Model.WithIndex())
         {
             <tr>
                 <th>@index</th>
-                <td>@todo.description</td>
+                <td>@item.Type.Value</td>
+                <td>@item.Name</td>
+                <td>@item.State</td>
+                <td>@item.StartTime</td>
+                <td>@item.source</td>
+                <td>@item.endpoints</td>
+                <td>@item.logs</td>
+                <td>@item.details</td>
             </tr>
         }
         </tbody>
