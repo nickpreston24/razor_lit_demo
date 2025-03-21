@@ -4,14 +4,22 @@
     ViewData["Title"] = "Home page";
 }
 
-
 <div x-data="setup()" class="text-center flex flex-col items-center">
     <h1 class="display-4">
         Welcome to Lit x HTMX x Razor!
     </h1>
+    
 
+    <section x-show="true" class="grid grid-cols-3 gap-2">
 
-    <section class="grid grid-cols-2 gap-2">
+        <hydro-card>
+            <slot name="img"></slot>
+            <slot name="actions">
+
+                <button class="btn btn-primary">Foo</button>
+            </slot>
+
+        </hydro-card>
 
         <div class="card dog-body">
 
@@ -33,30 +41,51 @@
                     </div>
 
                     <div class="justify-end card-actions">
-                        @* <button class="btn btn-primary">Buy Now</button> *@
+
+                        <button hx-get
+                                hx-page="Index"
+                                hx-page-handler="Ping"
+                                class="btn btn-primary">?
+                        </button>
+
                         <down-circle-button></down-circle-button>
+
                         <span x-text="foo"></span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div>
-
-            <div hx-sse="connect:/rn-updates">
-                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Featured Random Number</div>
-                    <div class="card-body">
-                        <h5 class="card-title">The Random Number is..</h5>
-                        <p class="card-text"
-                           hx-trigger="sse:number"
-                           hx-get="/random">
-                            <span>@Number.Value</span>
-                        </p>
-                    </div>
+        <div class="d-flex justify-content-center">
+            <div hx-sse="connect:/rn-updates" class="card mb-3 text-center" style="max-width: 18rem;">
+                <div class="card-header bg-primary text-white">Featured Random Number</div>
+                <div class="card-body">
+                    <h5 class="card-title">The Random Number is...</h5>
+                    <p class="card-text fa-4x"
+                       hx-trigger="sse:number"
+                       hx-get="@Url.Page("Index", "Random")">
+                        <span>@Number.Value</span>
+                    </p>
                 </div>
             </div>
         </div>
+
+        @* <div> *@
+        @* *@
+        @*     <div hx-sse="connect:/rn-updates"> *@
+        @*         <div class="card text-white bg-dark mb-3" style="max-width: 18rem;"> *@
+        @*             <div class="card-header">Featured Random Number</div> *@
+        @*             <div class="card-body"> *@
+        @*                 <h5 class="card-title">The Random Number is..</h5> *@
+        @*                 <p class="card-text" *@
+        @*                    hx-trigger="sse:number" *@
+        @*                    hx-get="/random"> *@
+        @*                     <span>@Number.Value</span> *@
+        @*                 </p> *@
+        @*             </div> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* </div> *@
     </section>
 </div>
 

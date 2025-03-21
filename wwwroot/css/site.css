@@ -1,3 +1,23 @@
 .dog-body {
     color: red;
 }
+
+
+.bento {
+    /*Src: https://tailwindcss.com/docs/border-radius*/
+    border-radius: 1.5rem;
+    border-color: #444444;
+    box-shadow: #49ff18;
+}
+
+.bento-shadow-blue {
+    box-shadow: 0 .05rem .075rem #00caff;
+}
+
+.bento-shadow-green {
+    box-shadow: 0 .05rem .075rem #00ffca;
+}
+
+.bento-shadow-red {
+    box-shadow: 0 .05rem .075rem #ff00ca;
+}

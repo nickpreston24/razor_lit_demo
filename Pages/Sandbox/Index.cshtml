@@ -1,0 +1,219 @@
+﻿@page
+@model razor_lit_demo.Pages.Sandbox.Index
+
+@{
+    string[] messages = new string[]
+    {
+        "Welcome to the sandbox!",
+        "The following are examples of Lit, Alpine, Hydro and HTMX combos",
+        "I'm testing each one individually to demonstrate each can easily interact with Asp.NET & C#",
+        "I Like Trains! \ud83d\ude85",
+        "I use Arch, btw"
+    };
+}
+
+<section class="min-h-screen">
+
+
+    @* <p></p> *@
+
+    <hydro-typing-effect messages="@messages"></hydro-typing-effect>
+
+    <!-- name of each tab group should be unique -->
+    <div class="tabs tabs-box">
+        <input type="radio" name="my_tabs_6" class="tab" aria-label="Tab 1"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+            <hydro-card>
+                <slot name="title">
+                    HyperLink with Htmx
+                </slot>
+
+                <p href="/Todos">Todos
+                    <down-circle-button
+                        hx-get
+                        hx-page="Index"
+                        hx-page-handler="Hello"
+                        hx-swap="outerHTML"></down-circle-button>
+                </p>
+            </hydro-card>
+        </div>
+
+        <input type="radio" name="my_tabs_6" class="tab" aria-label="Tab 2"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+            <hydro-card>
+                <slot name="title">Link with Htmx</slot>
+
+                <span class="btn"
+                      hx-get
+                      hx-page="Index"
+                      hx-page-handler="Hello"
+                      hx-swap="outerHTML"></span>
+            </hydro-card>
+        </div>
+
+        <input type="radio" name="my_tabs_6" class="tab" aria-label="Tab 3"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+
+            <hydro-card>
+                <slot name="title">
+                <span class="text-3xl">
+                    Lit code mockup example
+                </span>
+                </slot>
+
+                <div class="bento-shadow-red">
+                    <label class="text-gold-500 text-2xl" for="">Daisy x Lit:</label>
+                    <code-mockup></code-mockup>
+                </div>
+            </hydro-card>
+        </div>
+
+        <input type="radio" name="my_tabs_6" class="tab" aria-label="Tab 4"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+
+            <hydro-card class="w-96">
+
+                <div class="">
+                    <a target="_blank" href="https://daisyui.com/components/mockup-code/">
+                        <label class="text-green-500 text-2xl" for="">Daisy Only (expected):</label>
+                    </a>
+
+                    <div class="mockup-code w-full">
+                        <pre data-prefix="1"><code>npm i daisyui</code></pre>
+                        <pre data-prefix="2"><code>installing...</code></pre>
+                        <pre data-prefix="3" class="bg-warning text-warning-content"><code>Error!</code></pre>
+                    </div>
+                </div>
+
+            </hydro-card>
+        </div>
+
+        <input type="radio" name="my_tabs_6" class="tab" aria-label="Tab 5"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+            <hydro-card>
+                <slot name="title">
+                    <span class="text-3xl">
+                        Hydro code mockup example
+                    </span>
+                </slot>
+                <hydro-code-mockup></hydro-code-mockup>
+            </hydro-card>
+        </div>
+
+        <hydro-tab>
+            <alpine-lit-combo></alpine-lit-combo>
+        </hydro-tab>
+
+        <hydro-tab tabname="persisted counter">
+            <div x-data="{ count: $persist(0) }">
+                <button x-on:click="count++">Increment</button>
+                <span x-text="count"></span>
+            </div>
+        </hydro-tab>
+    </div>
+</section>
+
+
+<template x-if="views.open" class="min-h-screen">
+
+    <hydro-tabbed-card>
+        <input type="radio" name="my_tabs_3" class="tab" aria-label="Tab 1"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+
+            <hydro-card>
+                <slot name="title">
+                    HyperLink with Htmx
+                </slot>
+
+                <p>Click the button to run HTMX swap</p>
+
+                <p href="/Todos">Todos
+                    <down-circle-button
+                        hx-get
+                        hx-page="Index"
+                        hx-page-handler="Hello"
+                        hx-swap="outerHTML">
+                        Click Me
+                    </down-circle-button>
+                </p>
+            </hydro-card>
+        </div>
+
+        <input type="radio" name="my_tabs_3" class="tab" aria-label="Tab 2" checked="checked"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+            <hydro-card>
+                <slot name="title">Link with Htmx</slot>
+
+                <span class="btn"
+                      hx-get
+                      hx-page="Index"
+                      hx-page-handler="Hello"
+                      hx-swap="outerHTML"></span>
+            </hydro-card>
+        </div>
+
+
+        <input type="radio" name="my_tabs_3" class="tab" aria-label="Tab 3"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+            <hydro-card class="w-96">
+                <slot name="title">
+                    <span class="text-3xl">
+                        Lit code mockup example
+                    </span>
+                </slot>
+
+                <div class="bento-shadow-red">
+                    <label class="text-gold-500 text-2xl" for="">Daisy x Lit:</label>
+                    <code-mockup></code-mockup>
+                </div>
+
+                <div class="bento-shadow-red">
+                    <a target="_blank" href="https://daisyui.com/components/mockup-code/">
+                        <label class="text-green-500 text-2xl" for="">Daisy Only (expected):</label>
+                    </a>
+
+                    <div class="mockup-code w-full">
+                        <pre data-prefix="1"><code>npm i daisyui</code></pre>
+                        <pre data-prefix="2"><code>installing...</code></pre>
+                        <pre data-prefix="3" class="bg-warning text-warning-content"><code>Error!</code></pre>
+                    </div>
+                </div>
+
+            </hydro-card>
+        </div>
+
+        <input type="radio" name="my_tabs_4" class="tab" aria-label="Tab 4"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+            content 4
+        </div>
+    </hydro-tabbed-card>
+</template>
+
+<template x-if="false" class="min-h-screen">
+
+
+    <hydro-tabbed-card>
+
+        <input type="radio" name="my_tabs_3" class="tab" aria-label="Tab 3"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+            ...
+        </div>
+
+        <input type="radio" name="my_tabs_2" class="tab" aria-label="Tab 2"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+            ...
+        </div>
+
+        <input type="radio" name="my_tabs_4" class="tab" aria-label="Tab 4"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+            ...
+        </div>
+
+        <input type="radio" name="my_tabs_1" class="tab" aria-label="Tab 1"/>
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+            ...
+        </div>
+
+    </hydro-tabbed-card>
+
+</template>

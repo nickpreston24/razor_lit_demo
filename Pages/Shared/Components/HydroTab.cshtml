@@ -1,0 +1,20 @@
+﻿@using CodeMechanic.Types
+@model razor_lit_demo.Pages.Shared.Components.HydroTab
+
+@{
+    // string tab_name = @Model.tabname.NotEmpty() ? Model.tabname : (nameof(HydroTab) + "_" + Guid.NewGuid());
+
+    string tab_name = @Model.tabname.IsEmpty()
+        ? "(Empty)"
+        : @Model.tabname;
+}
+
+
+<input type="radio" name="my_tabs_6" checked="checked" class="tab" aria-label="@tab_name"/>
+<div class="tab-content bg-base-100 border-base-300 p-6">
+    @Model.Slot()
+</div>
+
+@* *@
+@* <input type="radio" name="my_tabs_4" class="tab" aria-label="Tab 4"/> *@
+@* <div class="tab-content bg-base-100 border-base-300 p-6">@Model.Slot()</div> *@

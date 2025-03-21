@@ -1,5 +1,7 @@
+using System.Text.Json;
 using CodeMechanic.Shargs;
 using Hydro.Configuration;
+using Lib.AspNetCore.ServerSentEvents;
 using Serilog;
 using Serilog.Core;
 using Sharpify.Core;
@@ -53,7 +55,13 @@ internal class Program
         builder.Services.AddRazorPages();
         builder.Services.AddHydro();
 
-        builder.Services.AddSingleton<LatLongService>();
+        // dependencies for server sent events
+        builder.Services.AddServerSentEvents();
+        // builder.Services.AddHostedService<RandomNumberWorker>();
+        builder.Services.AddHostedService<ServerEventsWorker>();
+
+
+        // builder.Services.AddSingleton<LatLongService>();
 
         var app = builder.Build();
 
@@ -72,7 +80,31 @@ internal class Program
 
         app.UseAuthorization();
 
+        app.MapServerSentEvents("/rn-updates");
         app.MapRazorPages();
+        // the connection for server events
+
+
+        // app.MapGet("/",
+        //     async (HttpContext ctx, ItemService service,
+        //         CancellationToken ct) =>
+        //     {
+        //         ctx.Response.Headers.Add("Content-Type", "text/event-stream");
+        //
+        //         while (!ct.IsCancellationRequested)
+        //         {
+        //             var item = await service.WaitForNewItem();
+        //
+        //             await ctx.Response.WriteAsync($"data: ");
+        //             await JsonSerializer.SerializeAsync(ctx.Response.Body,
+        //                 item);
+        //             await ctx.Response.WriteAsync($"\n\n");
+        //             await ctx.Response.Body.FlushAsync();
+        //
+        //             service.Reset();
+        //         }
+        //     });
+
         app.UseHydro(builder.Environment);
 
         app.Run();

@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using CodeMechanic.Diagnostics;
+﻿using CodeMechanic.Diagnostics;
 using CodeMechanic.Types;
 using Lib.AspNetCore.ServerSentEvents;
 

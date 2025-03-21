@@ -6,8 +6,6 @@
     <title>@ViewData["Title"] - razor_lit_demo</title>
     <script type="importmap"></script>
 
-
-
     <!-- TAILWIND -->
 
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.0-beta.1/daisyui.css" rel="stylesheet" type="text/css"/>
@@ -37,9 +35,51 @@
     @* <script type="module" src="~/lit/components/my-timer.js"></script> *@
 
 
-    <script type="module" src="~/lit/components/greeting.js"></script>
-    <script type="module" src="~/lit/components/DownCircleButton.js"></script>
+    <script type="module" src="~/lit/components/alpine-lit-combo.js"></script>
     <script type="module" src="~/lit/components/bms_counter.js"></script>
+    <script type="module" src="~/lit/components/code-mockup.js"></script>
+    <script type="module" src="~/lit/components/confirm-delete-htmx.js"></script>
+    <script type="module" src="~/lit/components/DownCircleButton.js"></script>
+    <script type="module" src="~/lit/components/greeting.js"></script>
+    <script type="module" src="~/lit/components/my-timer.js"></script>
+
+    <script type="module">
+        Alpine.data('views', function () {
+                console.log('initializing view toggles ...')
+                return {
+                    open: this.$persist(true),
+
+                    tabs: {
+                        refactors: {
+                            show: this.$persist(true)
+                            , toggle() {
+                                this.show = !this.show
+                            }
+                        },
+                        forklifts: {
+                            show: this.$persist(true)
+                            , toggle() {
+                                this.show = !this.show
+                            }
+                        },
+                        hydrations: {
+                            show: false, toggle() {
+                                this.show = !this.show
+                            }
+                        },
+                        // navbars: { 
+                        //     center: { show: true, toggle() {this.show = ! this.show}  },
+                        //     start: { show: true, toggle() {this.show = ! this.show}  },
+                        //     end: { show: true, toggle() {this.show = ! this.show}  },
+                        // },
+                    },
+                    toggle() {
+                        this.open = !this.open
+                    }
+                }
+            }
+        )
+    </script>
 
     <link rel="stylesheet" type="text/css" href="css/site.css"/>
 
@@ -56,6 +96,14 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Sandbox">Sandbox</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/11_ServerEvents">SSE</a>
                 </li>
             </ul>
         </slot>
