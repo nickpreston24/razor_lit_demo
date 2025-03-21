@@ -1,0 +1,163 @@
+﻿
+@{
+    string[] messages = new string[]
+    {
+        "Welcome to the sandbox!",
+        "The following are examples of Lit, Alpine, Hydro and HTMX combos",
+        "I'm testing each one individually to demonstrate each can easily interact with Asp.NET & C#",
+        "I Like Trains! \ud83d\ude85",
+        "I use Arch, btw"
+    };
+}
+
+<section x-data="{button_text: 'Download', current_tab: $persist('persisted counter')}" class="min-h-screen">
+
+
+    <hydro-typing-effect messages="@messages"></hydro-typing-effect>
+    <label for="">Current tab: </label>
+    <pre x-text="current_tab"></pre>
+
+    <!-- name of each tab group should be unique -->
+    <div class="tabs tabs-box">
+
+        <hydro-tab tabname="Lit Svg + HyperLink + Htmx">
+            <hydro-card>
+                <slot name="title">
+                    Lit Svg + HyperLink + Htmx
+                </slot>
+                <p href="/Todos">Todos
+                    <down-circle-button
+                        hx-get
+                        hx-page="/Sandbox/Index"
+                        hx-page-handler="Hello"
+                        hx-swap="outerHTML"></down-circle-button>
+                </p>
+            </hydro-card>
+        </hydro-tab>
+
+        <hydro-tab tabname="link + htmx (no Lit)">
+            <hydro-card>
+                <slot name="title">Link with Htmx</slot>
+
+                <span class="btn"
+                      hx-get
+                      hx-page="/Sandbox/Index"
+                      hx-page-handler="Hello"
+                      hx-swap="outerHTML"></span>
+            </hydro-card>
+        </hydro-tab>
+
+        <hydro-tab tabname="Lit + DaisyUI code Mockup">
+
+            <hydro-card>
+                <slot name="title">
+                <span class="text-3xl">
+                    Lit code mockup example
+                </span>
+                </slot>
+
+                <div class="bento-shadow-red">
+                    <label class="text-gold-500 text-2xl" for="">Daisy x Lit:</label>
+                    <code-mockup></code-mockup>
+                </div>
+            </hydro-card>
+        </hydro-tab>
+
+        <hydro-tab tabname="Daisy Only">
+
+            <hydro-card class="w-96">
+
+                <a target="_blank" href="https://daisyui.com/components/mockup-code/">
+                    <label class="text-green-500 text-2xl" for="">Daisy Only (expected):</label>
+                </a>
+
+                <div class="mockup-code w-full">
+                    <pre data-prefix="1"><code>npm i daisyui</code></pre>
+                    <pre data-prefix="2"><code>installing...</code></pre>
+                    <pre data-prefix="3" class="bg-warning text-warning-content"><code>Error!</code></pre>
+                </div>
+
+            </hydro-card>
+        </hydro-tab>
+
+        <hydro-tab tabname="code mockup (hydro)">
+            <hydro-card>
+                <slot name="title">
+                    <span class="text-3xl">
+                        Hydro code mockup example
+                    </span>
+                </slot>
+                <hydro-code-mockup></hydro-code-mockup>
+            </hydro-card>
+        </hydro-tab>
+
+        <hydro-tab tabname="alpine in lit (attempt, failed)">
+            <alpine-lit-combo></alpine-lit-combo>
+        </hydro-tab>
+
+        <hydro-tab tabname="persisted counter">
+            <div class="bento-shadow-green" x-data="{ count: $persist(0) }">
+
+                <label for="">Count: </label>
+                <span class="text-primary" x-text="count"></span>
+
+                <down-circle-button
+                    x-on:click="count++">
+                </down-circle-button>
+
+                <down-circle-button
+                    x-on:click="count--">
+                </down-circle-button>
+
+                <button class="btn-secondary" x-on:click="count=0">Reset</button>
+
+            </div>
+        </hydro-tab>
+
+        <hydro-tab tabname="Lit Hello World">
+            <div class="card w-96 bg-base-100 card-xl shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        Xlarge Card
+                    </h2>
+
+                    <div class="flex flex-col items-center justify-center gap-2">
+
+                        <p class="text-slate-500">
+                            The following is a Hello World in Lit, using custom styles defined inside the
+                            component itself
+                        </p>
+
+                        <simple-greeting name="my baby"></simple-greeting>
+                        <simple-greeting name="my honey"></simple-greeting>
+                    </div>
+
+                    <div class="justify-end card-actions">
+                        
+                        <span
+                            hx-get
+                            hx-page="Index"
+                            hx-page-handler="Ping"
+                            class="btn btn-secondary">
+                           
+                            <down-circle-button>
+
+                            </down-circle-button>
+                            
+                            <span x-text="button_text"></span>
+                          
+                        </span>
+
+
+                    </div>
+                </div>
+            </div>
+        </hydro-tab>
+
+        <hydro-tab tabname="Polling example">
+
+            <div hx-get="@Url.Page("Index", "News")" hx-trigger="every 2s"></div>
+
+        </hydro-tab>
+    </div>
+</section>

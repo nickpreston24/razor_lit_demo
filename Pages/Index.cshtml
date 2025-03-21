@@ -2,59 +2,42 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    string text = "fubar";
 }
 
-<div x-data="setup()" class="text-center flex flex-col items-center">
-    <h1 class="display-4">
-        Welcome to Lit x HTMX x Razor!
-    </h1>
-    
+
+<div class="text-center flex flex-col items-center">
+
+    @* *@
+    @* <div x-show="darkMode_on"> *@
+    @*     join the dark side! *@
+    @* *@
+    @*     <button x-on:click="$store.darkMode.toggle()">Turn back to light side!</button> *@
+    @* </div> *@
+
+
+    <main class="container" x-data>
+        <article class="card">
+            <header>
+                <h3>Counter Value</h3>
+            </header>
+            <section>
+                <p x-text="$store.counter.value"></p>
+            </section>
+        </article>
+
+        <button type="button" x-on:click="$store.counter.increment()">
+            Increment
+        </button>
+        <button type="button" x-on:click="$store.counter.reset()">
+            Reset
+        </button>
+    </main>
+
+
+    @* <partial name="Sandbox/_LitAlpineHtmxSamples"/> *@
 
     <section x-show="true" class="grid grid-cols-3 gap-2">
-
-        <hydro-card>
-            <slot name="img"></slot>
-            <slot name="actions">
-
-                <button class="btn btn-primary">Foo</button>
-            </slot>
-
-        </hydro-card>
-
-        <div class="card dog-body">
-
-            <div class="card w-96 bg-base-100 card-xl shadow-sm">
-                <div class="card-body">
-                    <h2 class="card-title">
-                        Xlarge Card
-                    </h2>
-
-                    <div class="flex flex-col items-center justify-center gap-2">
-
-                        <p class="text-slate-500">
-                            The following is a Hello World in Lit, using custom styles defined inside the
-                            component itself
-                        </p>
-
-                        <simple-greeting name="my baby"></simple-greeting>
-                        <simple-greeting name="my honey"></simple-greeting>
-                    </div>
-
-                    <div class="justify-end card-actions">
-
-                        <button hx-get
-                                hx-page="Index"
-                                hx-page-handler="Ping"
-                                class="btn btn-primary">?
-                        </button>
-
-                        <down-circle-button></down-circle-button>
-
-                        <span x-text="foo"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="d-flex justify-content-center">
             <div hx-sse="connect:/rn-updates" class="card mb-3 text-center" style="max-width: 18rem;">
@@ -70,31 +53,23 @@
             </div>
         </div>
 
-        @* <div> *@
-        @* *@
-        @*     <div hx-sse="connect:/rn-updates"> *@
-        @*         <div class="card text-white bg-dark mb-3" style="max-width: 18rem;"> *@
-        @*             <div class="card-header">Featured Random Number</div> *@
-        @*             <div class="card-body"> *@
-        @*                 <h5 class="card-title">The Random Number is..</h5> *@
-        @*                 <p class="card-text" *@
-        @*                    hx-trigger="sse:number" *@
-        @*                    hx-get="/random"> *@
-        @*                     <span>@Number.Value</span> *@
-        @*                 </p> *@
-        @*             </div> *@
-        @*         </div> *@
-        @*     </div> *@
-        @* </div> *@
     </section>
+
+    @* <script> *@
+    @*     document.addEventListener('alpine:initializing', () => { *@
+    @*         console.log("loading counter store (index)...") *@
+    @* *@
+    @*         Alpine.store('counter', { *@
+    @*             value: Alpine.$persist(0), *@
+    @*             increment() { *@
+    @*                 this.value++ *@
+    @*             }, *@
+    @*             reset() { *@
+    @*                 this.value = 0; *@
+    @*             } *@
+    @*         }) *@
+    @*     }) *@
+    @* </script> *@
 </div>
 
-<script>
-
-    function setup() {
-        return {
-            foo: "Download"
-        }
-    }
-</script>
 

@@ -52,6 +52,8 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+
+        builder.Services.AddSingleton(arguments);
         builder.Services.AddRazorPages();
         builder.Services.AddHydro();
 

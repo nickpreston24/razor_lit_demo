@@ -1,0 +1,24 @@
+﻿@model razor_lit_demo.Pages.Shared.Components.HydroArticle
+
+@{
+    /// I'm attempting x-transitions here, but it's not working.
+    /// probably best to just use x-data {open : false} and a toggle fn.
+}
+
+<div
+    x-show="@Model.show_json"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 scale-90"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-90"
+
+    id="add_task_form"
+    class="border-accent border-0">
+
+    <hydro-card>
+        @Model.Text
+    </hydro-card>
+
+</div>

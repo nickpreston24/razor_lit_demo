@@ -17,7 +17,10 @@
     <script src="~/lib/htmx/htmx.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    
     <!-- ALPINEJS -->
+    <script type="module" src="js/counter.js"></script>
+    
     <script defer src="https://cdn.jsdelivr.net/npm/@@alpinejs/collapse@@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@@alpinejs/persist@@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@@alpinejs/focus@@3.x.x/dist/cdn.min.js"></script>
@@ -43,47 +46,67 @@
     <script type="module" src="~/lit/components/greeting.js"></script>
     <script type="module" src="~/lit/components/my-timer.js"></script>
 
-    <script type="module">
-        Alpine.data('views', function () {
-                console.log('initializing view toggles ...')
-                return {
-                    open: this.$persist(true),
 
-                    tabs: {
-                        refactors: {
-                            show: this.$persist(true)
-                            , toggle() {
-                                this.show = !this.show
-                            }
-                        },
-                        forklifts: {
-                            show: this.$persist(true)
-                            , toggle() {
-                                this.show = !this.show
-                            }
-                        },
-                        hydrations: {
-                            show: false, toggle() {
-                                this.show = !this.show
-                            }
-                        },
-                        // navbars: { 
-                        //     center: { show: true, toggle() {this.show = ! this.show}  },
-                        //     start: { show: true, toggle() {this.show = ! this.show}  },
-                        //     end: { show: true, toggle() {this.show = ! this.show}  },
-                        // },
-                    },
-                    toggle() {
-                        this.open = !this.open
-                    }
-                }
-            }
-        )
-    </script>
+
+    @* <script type="module"> *@
+    @*     Alpine.data('views', function () { *@
+    @*             console.log('initializing view toggles ...') *@
+    @*             return { *@
+    @*                 open: this.$persist(true), *@
+    @* *@
+    @*                 tabs: { *@
+    @*                     refactors: { *@
+    @*                         show: this.$persist(true) *@
+    @*                         , toggle() { *@
+    @*                             this.show = !this.show *@
+    @*                         } *@
+    @*                     }, *@
+    @*                     forklifts: { *@
+    @*                         show: this.$persist(true) *@
+    @*                         , toggle() { *@
+    @*                             this.show = !this.show *@
+    @*                         } *@
+    @*                     }, *@
+    @*                     hydrations: { *@
+    @*                         show: false, toggle() { *@
+    @*                             this.show = !this.show *@
+    @*                         } *@
+    @*                     }, *@
+    @*                     // navbars: {  *@
+    @*                     //     center: { show: true, toggle() {this.show = ! this.show}  }, *@
+    @*                     //     start: { show: true, toggle() {this.show = ! this.show}  }, *@
+    @*                     //     end: { show: true, toggle() {this.show = ! this.show}  }, *@
+    @*                     // }, *@
+    @*                 }, *@
+    @*                 toggle() { *@
+    @*                     this.open = !this.open *@
+    @*                 } *@
+    @*             } *@
+    @*         } *@
+    @*     ) *@
+    @* </script> *@
 
     <link rel="stylesheet" type="text/css" href="css/site.css"/>
 
 </head>
+@* *@
+@* <script> *@
+@*     document.addEventListener('alpine:initializing', () => { *@
+@*         console.log("loading counter store from _Layout...") *@
+@*         Alpine.store('counter', { *@
+@*             value: Alpine.$persist(0), *@
+@*             increment() { *@
+@*                 this.value++ *@
+@*             }, *@
+@*             reset() { *@
+@*                 this.value = 0; *@
+@*             } *@
+@*         }) *@
+@*     }) *@
+@* </script> *@
+
+
+
 <body>
 <header>
 
@@ -120,6 +143,33 @@
         &copy; 2025 - razor_lit_demo - <a asp-area="" asp-page="/Privacy">Privacy</a>
     </div>
 </footer>
+
+<script type="module">
+    console.log("loading dark mode store...")
+
+    Alpine.store('darkMode', {
+        on: Alpine.$persist(false).as('darkMode_on'),
+        toggle() {
+            console.log("toggling")
+            this.on = !this.on;
+        }
+    });
+
+
+    // document.addEventListener('alpine:initializing', () => {
+    //console.log("loading counter store...")
+    //
+    //    Alpine.store('counter', {
+    //        value: Alpine.$persist(0),
+    //        increment() {
+    //            this.value++
+    //        },
+    //        reset() {
+    //            this.value = 0;
+    //        }
+    //    })
+    // })
+</script>
 
 @await RenderSectionAsync("Scripts", required: false)
 </body>

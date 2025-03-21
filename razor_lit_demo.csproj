@@ -59,8 +59,4 @@
         <None Include="wwwroot\lit\**"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <_ContentIncludedByDefault Remove="Pages\Todos\Index.cshtml"/>
-    </ItemGroup>
-
 </Project>
