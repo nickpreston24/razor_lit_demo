@@ -6,7 +6,10 @@
 
 <div class="text-center flex flex-col items-center">
 
-    <span x-text="$store.theme.value"></span>
+    <!-- debug panel -->
+    <template x-if="false">
+        <span x-text="$store.theme.value"></span>
+    </template>
 
     <partial name="Sandbox/_LitAlpineHtmxSamples"/>
 

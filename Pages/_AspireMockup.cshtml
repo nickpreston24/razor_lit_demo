@@ -1,0 +1,26 @@
+﻿@using CodeMechanic.Diagnostics
+@using CodeMechanic.Types
+@model List<Todo>
+
+@{
+}
+
+<div class="overflow-x-auto">
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ((Todo todo, int index) in @Model.WithIndex().Dump("with index"))
+        {
+            <tr>
+                <th>@index</th>
+                <td>@todo.description</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

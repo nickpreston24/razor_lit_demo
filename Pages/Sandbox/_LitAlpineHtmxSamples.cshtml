@@ -10,8 +10,7 @@
     };
 }
 
-<section x-data="{button_text: 'Download', current_tab: $persist('persisted counter')}" class="min-h-screen">
-
+<section x-data="{button_text: 'Download', current_tab: $persist('')}" class="min-h-screen">
 
     <hydro-typing-effect messages="@messages"></hydro-typing-effect>
     <label for="">Current tab: </label>
@@ -20,16 +19,17 @@
     <!-- name of each tab group should be unique -->
     <div class="tabs tabs-box">
 
-        <hydro-tab tabname="Lit Svg + HyperLink + Htmx">
+        <hydro-tab tabname="Lit Svg Button + Htmx">
             <hydro-card>
                 <slot name="title">
-                    Lit Svg + HyperLink + Htmx
+                    Lit Svg Button + Htmx
                 </slot>
-                <p href="/Todos">Todos
+                <p class="text-primary">Get Todos
                     <down-circle-button
                         hx-get
                         hx-page="/Sandbox/Index"
-                        hx-page-handler="Hello"
+                        hx-page-handler="Todos"
+                        hx-vars="{viewname:'_AspireMockup'}"
                         hx-swap="outerHTML"></down-circle-button>
                 </p>
             </hydro-card>
@@ -51,9 +51,9 @@
 
             <hydro-card>
                 <slot name="title">
-                <span class="text-3xl">
-                    Lit code mockup example
-                </span>
+                    <span class="text-3xl">
+                        Lit code mockup example
+                    </span>
                 </slot>
 
                 <div class="bento-shadow-red">
@@ -133,19 +133,19 @@
                     </div>
 
                     <div class="justify-end card-actions">
-                        
+
                         <span
                             hx-get
                             hx-page="Index"
                             hx-page-handler="Ping"
                             class="btn btn-secondary">
-                           
+
                             <down-circle-button>
 
                             </down-circle-button>
-                            
+
                             <span x-text="button_text"></span>
-                          
+
                         </span>
 
 
