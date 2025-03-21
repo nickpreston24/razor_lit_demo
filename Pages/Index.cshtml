@@ -2,74 +2,14 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    string text = "fubar";
 }
-
 
 <div class="text-center flex flex-col items-center">
 
-    @* *@
-    @* <div x-show="darkMode_on"> *@
-    @*     join the dark side! *@
-    @* *@
-    @*     <button x-on:click="$store.darkMode.toggle()">Turn back to light side!</button> *@
-    @* </div> *@
+    <span x-text="$store.theme.value"></span>
 
+    <partial name="Sandbox/_LitAlpineHtmxSamples"/>
 
-    <main class="container" x-data>
-        <article class="card">
-            <header>
-                <h3>Counter Value</h3>
-            </header>
-            <section>
-                <p x-text="$store.counter.value"></p>
-            </section>
-        </article>
-
-        <button type="button" x-on:click="$store.counter.increment()">
-            Increment
-        </button>
-        <button type="button" x-on:click="$store.counter.reset()">
-            Reset
-        </button>
-    </main>
-
-
-    @* <partial name="Sandbox/_LitAlpineHtmxSamples"/> *@
-
-    <section x-show="true" class="grid grid-cols-3 gap-2">
-
-        <div class="d-flex justify-content-center">
-            <div hx-sse="connect:/rn-updates" class="card mb-3 text-center" style="max-width: 18rem;">
-                <div class="card-header bg-primary text-white">Featured Random Number</div>
-                <div class="card-body">
-                    <h5 class="card-title">The Random Number is...</h5>
-                    <p class="card-text fa-4x"
-                       hx-trigger="sse:number"
-                       hx-get="@Url.Page("Index", "Random")">
-                        <span>@Number.Value</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    @* <script> *@
-    @*     document.addEventListener('alpine:initializing', () => { *@
-    @*         console.log("loading counter store (index)...") *@
-    @* *@
-    @*         Alpine.store('counter', { *@
-    @*             value: Alpine.$persist(0), *@
-    @*             increment() { *@
-    @*                 this.value++ *@
-    @*             }, *@
-    @*             reset() { *@
-    @*                 this.value = 0; *@
-    @*             } *@
-    @*         }) *@
-    @*     }) *@
-    @* </script> *@
 </div>
 
 

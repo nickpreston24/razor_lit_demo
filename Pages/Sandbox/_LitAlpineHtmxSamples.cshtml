@@ -96,20 +96,20 @@
         </hydro-tab>
 
         <hydro-tab tabname="persisted counter">
-            <div class="bento-shadow-green" x-data="{ count: $persist(0) }">
+            <div class="bento-shadow-green" x-data>
 
                 <label for="">Count: </label>
-                <span class="text-primary" x-text="count"></span>
+                <span class="text-primary" x-text="$store.counter.value"></span>
 
                 <down-circle-button
-                    x-on:click="count++">
+                    x-on:click="$store.counter.increment()">
                 </down-circle-button>
 
                 <down-circle-button
-                    x-on:click="count--">
+                    x-on:click="$store.counter.decrement()">
                 </down-circle-button>
 
-                <button class="btn-secondary" x-on:click="count=0">Reset</button>
+                <button class="btn-secondary" x-on:click="$store.counter.reset()">Reset</button>
 
             </div>
         </hydro-tab>
@@ -154,10 +154,53 @@
             </div>
         </hydro-tab>
 
-        <hydro-tab tabname="Polling example">
+        <hydro-tab tabname="Polling">
 
             <div hx-get="@Url.Page("Index", "News")" hx-trigger="every 2s"></div>
 
+        </hydro-tab>
+
+        <hydro-tab tabname="server sent events">
+
+            <section class="grid grid-cols-3 gap-2">
+
+                <div class="d-flex justify-content-center">
+                    <div hx-sse="connect:/rn-updates" class="card mb-3 text-center" style="max-width: 18rem;">
+                        <div class="card-header bg-primary text-white">Featured Random Number</div>
+                        <div class="card-body">
+                            <h5 class="card-title">The Random Number is...</h5>
+                            <p class="card-text fa-4x"
+                               hx-trigger="sse:number"
+                               hx-get="@Url.Page("Index", "Random")">
+                                <span>@Number.Value</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </hydro-tab>
+
+        <hydro-tab tabname="Alpine persisting View Toggles">
+            <hydro-card>
+                @* <span x-text="$store.views.tabs.refactors.name"></span> *@
+                @* <span x-text="$store.open === true"></span> *@
+
+                @* <span x-text="$store.counter.value"></span> *@
+
+                <div x-data="myData()">
+                    <input type="text" x-model:value="greeting"/>
+
+                    <span x-text="tabs.name"></span>
+                    <span x-text="tabs.title"></span>
+                </div>
+
+
+                <div>
+                    <button x-data @@click="$store.theme.set('dark')">Toggle Dark Mode</button>
+                </div>
+
+            </hydro-card>
         </hydro-tab>
     </div>
 </section>
